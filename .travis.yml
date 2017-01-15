@@ -1,0 +1,10 @@
+sudo: required
+
+language: java
+
+services:
+        - docker
+
+script:
+        - cd wildfly;docker build --rm=true --tag=vladimirmezera/centos/wildfly .
+          
