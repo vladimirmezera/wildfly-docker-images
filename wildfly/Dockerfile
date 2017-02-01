@@ -2,7 +2,6 @@ FROM centos:latest
 MAINTAINER vladimir.mezera@gmail.com
 
 LABEL Vendor="Vladimir Mezera"
-LABEL License=MIT
 LABEL Version=10.1.0.Final
 
 
