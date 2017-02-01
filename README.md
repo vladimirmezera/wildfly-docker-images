@@ -1,8 +1,8 @@
 Docker images
--------
+=======
 
 Build docker image
-=======
+-------
 
 ````shell
 cd wildfly
