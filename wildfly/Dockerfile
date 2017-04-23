@@ -2,7 +2,6 @@ FROM centos7:centos7
 MAINTAINER vladimir.mezera@gmail.com
 
 LABEL Vendor="Vladimir Mezera"
-LABEL License=GPLv2
 LABEL Version=10.1.0.Final
 
 
