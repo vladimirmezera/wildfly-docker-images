@@ -1,4 +1,4 @@
-FROM centos:latest
+FROM centos7:centos7
 MAINTAINER vladimir.mezera@gmail.com
 
 LABEL Vendor="Vladimir Mezera"
@@ -7,15 +7,15 @@ LABEL Version=10.1.0.Final
 
 
 # Update base image
-RUN yum -y update && yum clean all
+RUN dnf update && dnf clean all
 
-RUN yum -y install tar java-1.8.0-openjdk-devel saxon \ 
+RUN dnf install tar java-1.8.0-openjdk-devel saxon \ 
     augeas bsdtar shadow-utils && yum clean all
 ENV WILDFLY_VERSION 10.1.0.Final
 
 RUN groupadd -r wildfly -g 433 && useradd -u 431 -r -g wildfly -d /opt/wildfly -s /sbin/nologin -c "WildFly user" wildfly
 
-RUN mkdir /opt/wildfly-$WILDFLY_VERSION
+RUN mkdir "/opt/wildfly-$WILDFLY_VERSION"
 
 RUN cd /opt && curl http://download.jboss.org/wildfly/$WILDFLY_VERSION/wildfly-$WILDFLY_VERSION.tar.gz | tar zx && chown -R wildfly:wildfly /opt/wildfly-$WILDFLY_VERSION
 
