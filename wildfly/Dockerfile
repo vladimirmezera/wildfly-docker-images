@@ -17,7 +17,7 @@ RUN groupadd -r wildfly -g 433 && useradd -u 431 -r -g wildfly -d /opt/wildfly -
 
 RUN mkdir "/opt/wildfly-$WILDFLY_VERSION"
 
-RUN WORKDIR $OPT  && curl "http://download.jboss.org/wildfly/$WILDFLY_VERSION/wildfly-$WILDFLY_VERSION.tar.gz" | tar zx && chown -R wildfly:wildfly "/opt/wildfly-$WILDFLY_VERSION"
+RUN WORKDIR "$OPT"  && curl "http://download.jboss.org/wildfly/$WILDFLY_VERSION/wildfly-$WILDFLY_VERSION.tar.gz" | tar zx && chown -R wildfly:wildfly "/opt/wildfly-$WILDFLY_VERSION"
 
 RUN ln -s "/opt/wildfly-$WILDFLY_VERSION /opt/wildfly" && chown -R wildfly:wildfly /opt/wildfly
 ENV JBOSS_HOME /opt/wildfly
