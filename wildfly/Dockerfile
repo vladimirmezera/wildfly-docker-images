@@ -1,4 +1,4 @@
-FROM centos7:centos7
+FROM centos:latest
 MAINTAINER vladimir.mezera@gmail.com
 
 LABEL Vendor="Vladimir Mezera"
@@ -7,9 +7,11 @@ LABEL Version=10.1.0.Final
 ENV OPT /opt
 
 # Update base image
-RUN dnf update && dnf clean all
+RUN yum install epel-release -y
+RUN yum install dnf -y
+RUN dnf update -y && dnf clean all
 
-RUN dnf install tar java-1.8.0-openjdk-devel saxon \ 
+RUN dnf -y install tar java-1.8.0-openjdk-devel saxon \ 
     augeas bsdtar shadow-utils && yum clean all
 ENV WILDFLY_VERSION 10.1.0.Final
 
@@ -17,7 +19,8 @@ RUN groupadd -r wildfly -g 433 && useradd -u 431 -r -g wildfly -d /opt/wildfly -
 
 RUN mkdir "/opt/wildfly-$WILDFLY_VERSION"
 
-RUN WORKDIR $OPT  && curl "http://download.jboss.org/wildfly/$WILDFLY_VERSION/wildfly-$WILDFLY_VERSION.tar.gz" | tar zx && chown -R wildfly:wildfly "/opt/wildfly-$WILDFLY_VERSION"
+WORKDIR "$OPT"
+RUN curl "http://download.jboss.org/wildfly/$WILDFLY_VERSION/wildfly-$WILDFLY_VERSION.tar.gz" | tar zx && chown -R wildfly:wildfly "/opt/wildfly-$WILDFLY_VERSION"
 
 RUN ln -s "/opt/wildfly-$WILDFLY_VERSION /opt/wildfly" && chown -R wildfly:wildfly /opt/wildfly
 ENV JBOSS_HOME /opt/wildfly
